@@ -1,0 +1,53 @@
+
+<Html>
+
+<Head>
+    <style type="text/css">
+        fieldset {
+            border: #00cc00 2px solid;
+            padding: 10px;
+            color: green;
+        }
+    </style>
+     <script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
+</head>
+    <body>
+        <form>
+
+            <fieldset>
+                First name:<br>
+                <input type="text" id="fname" Value=""><br> Last name :
+                <br>
+                <input type="text" id="lname" Value=""><br> Address1 :
+                <br>
+                <input type="text" id="Add1" Value=""><br> Address2 :
+                <br>
+                <input type="text" id="Add2" Value=""><br>
+                <br>
+                <button type="button" id="submit_data" name="btn">Submit</button>
+            </fieldset>
+        </form>
+        <script >
+            function html_table_to_excel(type)
+        {
+            var data = ''
+            data += $('#fname').val() + ';'
+            data += $('#lname').val()+';'
+            data += '\r\n';
+            var file = XLSX.utils.table_to_book(data, {sheet: "sheet1"});
+    
+            XLSX.write(file, { bookType: type, bookSST: true, type: 'base64' });
+            XLSX.writeFile(file, 'file.' + type);
+    
+          
+        var el=document.getElementById("submit_data")
+        if(el){
+            el.addEventListener("click", html_table_to_excel('xlsx'));
+        }  
+        }
+        
+            
+        </script>
+    </body>
+
+</html>
